@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVAN COMPUTER SERVICES AINA - Dashboard</title>
+   <style>
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 50%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: none;
+}
+
+header {
+    background-color: #414242;
+    position:fixed;
+    width: 100%;
+    margin-top: -40px;
+    color: #fff;
+    z-index: 1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 999;
+}
+
+.modal button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#yes-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    width: 30%;
+}
+
+#cancel-btn {
+    background-color: #f44336;
+    color: #fff;
+    width: 30%;
+}
+
+#sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 40%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+#sidebar i {
+    margin-right: 6px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    position: relative;
+    margin-top: 40px;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 28%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#total-sales-card {
+    background-color: #ffcccc;
+}
+
+#total-finance-card {
+    background-color: #ccffcc;
+}
+
+#profit-card {
+    background-color: #ccccff;
+}
+
+.charts {
+    display: block;
+    justify-content: space-between;
+}
+
+#sales-chart, #finance-chart {
+    width: 40%;
+    height: 300px;
+    margin: 16px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+input[type="number"] {
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 12px;
+    width: 40%;
+}
+button {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 12px;
+    width: 10%;
+    border: 1px solid dodgerblue;
+}
+
+
+/* Tablets */
+@media (max-width: 1024px) {
+   body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    position:fixed;
+    width: 100%;
+    margin-top: -80px;
+    color: #fff;
+    font-size: 25px;
+    z-index: 999;
+}
+
+#message {
+    background-color: white;
+    color: black;
+    margin: -10% 0 0 30%;
+    padding: 10px 20px;
+    z-index: 999;
+    position: absolute;
+    border-radius: 6px;
+    font-size: 20px;
+    box-shadow: #ccccff;
+    border: 1px solid dodgerblue;
+    display: none;
+}
+
+#confirm a{
+    text-decoration: none;
+    font-size: 18px;
+    color: green;
+    font-weight: 600;
+}
+#confirm .no a{
+    color: red;
+    margin-left: 60%;
+}
+
+#sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 8px;
+    left: 0;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 40%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 25px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    position: relative;
+    margin-top: 80px;
+}
+
+.main-content h2 {
+    font-size: 30px;
+    color: rgb(46, 47, 48);
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 28%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+#total-sales-card {
+    background-color: #f79b9b;
+    font-size: 28px;
+}
+
+#total-finance-card {
+    background-color: #6eff6e;
+    font-size: 28px;
+}
+
+#profit-card {
+    background-color: #8888eb;
+    font-size: 28px;
+}
+
+.charts {
+    display: block;
+    justify-content: space-between;
+}
+
+#sales-chart, #finance-chart {
+    width: 80%;
+    height: 300px;
+    margin: 16px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+input[type="number"] {
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 20px;
+    width: 60%;
+    font-size: 25px;
+}
+button {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 20px;
+    width: 20%;
+    border: 1px solid dodgerblue;
+    font-size: 25px;
+}
+}
+
+/* Phones */
+@media (max-width: 600px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    position:fixed;
+    width: 100%;
+    margin-top: -40px;
+    color: #fff;
+    display: block;
+    z-index: 999;
+}
+
+#message {
+    background-color: white;
+    color: black;
+    margin: 60% 0 0 5%;
+    padding: 10px 20px;
+    z-index: 999;
+    position: absolute;
+    border-radius: 6px;
+    font-size: 20px;
+    box-shadow: #ccccff;
+    border: 1px solid dodgerblue;
+    display: none;
+}
+
+#confirm a{
+    text-decoration: none;
+    font-size: 18px;
+    color: green;
+    font-weight: 600;
+}
+#confirm .no a{
+    color: red;
+    margin-left: 60%;
+}
+
+
+#link {
+    float: right;
+    margin-top: -65px;
+    border-radius: 8px;
+    margin-right: 5%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: block;
+    width: 40%;
+}
+
+header h2 {
+    margin-left: -16%;
+    font-size: 80%;
+}
+#sidebar {
+    width: 200px;
+    height: 60vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 60px;
+    left: 70px;
+    z-index: 999;
+    opacity: 999;
+    display: none;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.main-content {
+    margin-left: 0;
+    padding: 20px;
+    position: relative;
+    margin-top: 40px;
+}
+
+.main-content h2 {
+    font-weight: 400;
+}
+
+.cards {
+    display: block;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+#total-sales-card {
+    background-color: #ec2c2c;
+    font-weight: 400;
+}
+
+#total-finance-card {
+    background-color: #3bee3b;
+}
+
+#profit-card {
+    background-color: #1c1cb8;
+}
+
+.charts {
+    display: block;
+    justify-content: space-between;
+}
+
+#sales-chart, #finance-chart {
+    width: 90%;
+    height: 300px;
+    margin-left: 0px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+input[type="number"] {
+    border: 1px solid #ddd;
+    outline: none;
+    padding: 12px;
+    width: 65%;
+}
+button {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 12px;
+    width: 25%;
+    border: 1px solid dodgerblue;
+}
+
+}
+
+   </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" /><body>
+    <header>
+        <center><h2>IVAN COMPUTER SERVICES AINA</h2></center>
+    </header>
+    <div id="sidebar">
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="sales.html"><i class="fas fa-shopping-cart"></i> Sales</a></li>
+            <li><a href="manage sales.html"><i class="fas fa-cog"></i> Manage Sales</a></li>
+            <li><a href="finance.html"><i class="fas fa-money-bill"></i> Finance</a></li>
+            <li><a href="manage finance.html"><i class="fas fa-cog"></i> Manage Finance</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt"></i> Report</a></li>
+            <li><a href="ledger.html"><i class="fas fa-book"></i> Ledger</a></li>
+            <li id="logout-btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</li>
+        </ul>
+    </div>
+       <div id="logout-modal" class="modal">
+        <p>Are you sure you want to log out?</p>
+        <button id="yes-btn">Yes</button>
+        <button id="cancel-btn">Cancel</button>
+    </div>
+    <div class="main-content">
+        <h2>Dashboard</h2>
+        <button id="link">View links</button>
+        <div class="cards">
+            <div class="card" id="total-sales-card">
+                <i class="fas fa-shopping-cart" style="font-size: 40px;"></i>
+                <h3>Total Sales</h3>
+                <p id="total-sales"></p>
+            </div>
+            <div class="card" id="total-finance-card">
+                <i class="fas fa-money-bill" style="font-size: 40px;"></i>
+                <h3>Total Finance</h3>
+                <p id="total-finance"></p>
+            </div>
+            <div class="card" id="profit-card">
+                <i class="fas fa-tachometer-alt" style="font-size: 40px;"></i>
+                <h3>Profit</h3>
+                <p id="profit"></p>
+            </div>
+        </div>
+        <input type="number" id="year-input" placeholder="Enter year to search graph">
+        <button id="search-btn">Search</button>
+        <div class="charts">
+            <canvas id="sales-chart"></canvas>
+            <canvas id="finance-chart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        const linkDisplay = document.getElementById('sidebar');
+document.getElementById('link').addEventListener('click',function() {
+  linkDisplay.style.display='block';
+  reset();
+});
+const logoutBtn = document.getElementById('logout-btn');
+const logoutModal = document.getElementById('logout-modal');
+const yesBtn = document.getElementById('yes-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+logoutBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'block';
+});
+
+yesBtn.addEventListener('click', () => {
+    // Log out the user (for demo, just redirect to login page)
+    window.location.href = 'file:///C:/Users/IT%20TECH%202025/Desktop/WEBSITES/IT%20DATA%20MONITOR%20SYSTEM/index.html';
+});
+
+cancelBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'none';
+});
+
+
+// Retrieve finance and sales data from local storage
+var financeData = JSON.parse(localStorage.getItem('finance'));
+var salesData = JSON.parse(localStorage.getItem('sales'));
+
+// Retrieve finance and sales data from local storage
+var financeData = JSON.parse(localStorage.getItem('finance'));
+var salesData = JSON.parse(localStorage.getItem('sales'));
+
+// Function to generate charts for a given year
+function generateCharts(year) {
+    // Filter finance and sales data for the given year
+    var financeForYear = financeData ? financeData.filter(finance => new Date(finance.dateIssue).getFullYear() === year) : [];
+    var salesForYear = salesData ? salesData.filter(sale => new Date(sale.date).getFullYear() === year) : [];
+
+    // Calculate total sales and finance for each month
+    var salesDataForYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var financeDataForYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    salesForYear.forEach(sale => {
+        var month = new Date(sale.date).getMonth();
+        salesDataForYear[month] += parseFloat(sale.amount);
+    });
+
+    financeForYear.forEach(finance => {
+        var month = new Date(finance.dateIssue).getMonth();
+        financeDataForYear[month] += parseFloat(finance.amountSigned);
+    });
+
+    // Generate charts
+    var salesChart = document.getElementById('sales-chart').getContext('2d');
+    var financeChart = document.getElementById('finance-chart').getContext('2d');
+
+    new Chart(salesChart, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Sales bar chart',
+                data: salesDataForYear,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Sales Chart for ' + year
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    new Chart(financeChart, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Finance bar chart',
+                data: financeDataForYear,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Finance Chart for ' + year
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+// Get current month and year
+var currentMonth = new Date().getMonth();
+var currentYear = new Date().getFullYear();
+
+// Filter finance and sales data for current month
+var financeForMonth = financeData ? financeData.filter(finance => new Date(finance.dateIssue).getMonth() === currentMonth && new Date(finance.dateIssue).getFullYear() === currentYear) : [];
+var salesForMonth = salesData ? salesData.filter(sale => new Date(sale.date).getMonth() === currentMonth && new Date(sale.date).getFullYear() === currentYear) : [];
+
+// Calculate total sales and finance for current month
+var totalSales = salesForMonth.reduce((acc, sale) => acc + parseFloat(sale.amount), 0);
+var totalFinance = financeForMonth.reduce((acc, finance) => acc + parseFloat(finance.amountSigned), 0);
+var profit = totalSales - totalFinance;
+
+// Display total sales and finance on dashboard
+document.getElementById('total-sales').innerHTML = totalSales;
+document.getElementById('total-finance').innerHTML = totalFinance;
+document.getElementById('profit').innerHTML = profit;
+
+// Generate charts for current year
+generateCharts(currentYear);
+
+// Add event listener to search button
+document.getElementById('search-btn').addEventListener('click', function() {
+    var year = parseInt(document.getElementById('year-input').value)});
+
+
+    </script>
+</body>
+</html>

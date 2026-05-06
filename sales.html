@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVAN COMPUTER SERVICES AINA - Sales</title>
+  <style>
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    color: #fff;
+    top: 0;
+    padding: 6px;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 999;
+}
+
+.modal button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#yes-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    width: 30%;
+}
+
+#cancel-btn {
+    background-color: #f44336;
+    color: #fff;
+    width: 30%;
+}
+
+
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 50%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: none;
+    color: white;
+    padding: 12px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+    margin-top: 5%;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar li {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 300px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: 5%;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="date"], input[type="text"], input[type="number"] {
+    width: 95%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+select {
+    width: 98%;
+    height: 60px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    color: #fff;
+    top: 0;
+    padding: 6px;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+}
+
+header h2{
+    font-size: 150%;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    transition: width 0.3s;
+    margin-top: 8%;
+    z-index: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar li {
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 50%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: none;
+    color: white;
+    padding: 12px;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 300px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: 5%;
+}
+
+.main-content h2 {
+    font-size: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+input[type="date"], input[type="text"], input[type="number"] {
+    width: 95%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 24px;
+}
+
+select {
+    width: 98%;
+    height: 60px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 24px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 50px;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+}
+
+/*Phones */
+@media (max-width: 600px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    color: #fff;
+    margin-top: -5%;
+    padding: 6px;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+header h2 {
+    font-size: 100%;
+}
+#link {
+    float: right;
+    margin-top: -56px;
+    border-radius: 8px;
+    margin-right: 3%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: block;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 40vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    margin-left: 0;
+    transition: width 0.3s;
+    margin-top: 20%;
+    display: none;
+}
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+#sidebar li {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 0px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: 5%;
+}
+
+.main-content h2 {
+    margin-top: 14%;
+    font-size: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+input[type="date"], input[type="text"], input[type="number"] {
+    width: 95%;
+    height: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 20px;
+}
+
+select {
+    width: 98%;
+    height: 50px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 20px;
+    position: relative;
+}
+#payment-method option {
+    position: absolute;
+    width: 100%;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+}
+  </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <center><h2>IVAN COMPUTER SERVICES AINA</h2></center>
+    </header>
+    <div id="sidebar">
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="sales.html"><i class="fas fa-shopping-cart"></i> Sales</a></li>
+            <li><a href="manage sales.html"><i class="fas fa-cog"></i> Manage Sales</a></li>
+            <li><a href="finance.html"><i class="fas fa-money-bill"></i> Finance</a></li>
+            <li><a href="manage finance.html"><i class="fas fa-cog"></i> Manage Finance</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt"></i> Report</a></li>
+            <li><a href="ledger.html"><i class="fas fa-book"></i> Ledger</a></li>
+            <li id="btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Sales</h2>
+         <button id="link">View links</button>
+        <form id="sales-form">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br><br>
+            <label for="activity">Activity Done:</label>
+            <input type="text" id="activity" name="activity"><br><br>
+            <label for="amount">Amount Paid:</label>
+            <input type="number" id="amount" name="amount"><br><br>
+            <label for="payment-method">Form of Payment:</label>
+            <select id="payment-method" name="payment-method">
+                <option value="Cash">Cash</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Mobile Money">Mobile Money</option>
+            </select><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('sales-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var date = document.getElementById('date').value;
+    var activity = document.getElementById('activity').value;
+    var amount = document.getElementById('amount').value;
+    var paymentMethod = document.getElementById('payment-method').value;
+
+    var salesData = {
+        date: date,
+        activity: activity,
+        amount: amount,
+        paymentMethod: paymentMethod
+    };
+
+    if (localStorage.getItem('sales') === null) {
+        var salesArray = [];
+        salesArray.push(salesData);
+        localStorage.setItem('sales', JSON.stringify(salesArray));
+    } else {
+        var salesArray = JSON.parse(localStorage.getItem('sales'));
+        salesArray.push(salesData);
+        localStorage.setItem('sales', JSON.stringify(salesArray));
+    }
+
+    alert('Sales data saved successfully!');
+    document.getElementById('sales-form').reset();
+});
+
+
+const linkDisplay = document.getElementById('sidebar');
+document.getElementById('link').addEventListener('click',function() {
+  linkDisplay.style.display='block';
+  reset();
+});
+const logoutBtn = document.getElementById('logout-btn');
+const logoutModal = document.getElementById('logout-modal');
+const yesBtn = document.getElementById('yes-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+logoutBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'block';
+});
+
+yesBtn.addEventListener('click', () => {
+    // Log out the user (for demo, just redirect to login page)
+    window.location.href = 'file:///C:/Users/IT%20TECH%202025/Desktop/WEBSITES/IT%20DATA%20MONITOR%20SYSTEM/index.html';
+});
+
+cancelBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'none';
+});
+
+
+    </script>
+</body>
+</html>

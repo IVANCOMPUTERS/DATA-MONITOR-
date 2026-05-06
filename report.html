@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVAN COMPUTER SERVICES AINA - Report</title>
+    <style>
+        body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    color: #fff;
+    z-index: 1;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 999;
+}
+
+.modal button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#yes-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    width: 30%;
+}
+
+#cancel-btn {
+    background-color: #f44336;
+    color: #fff;
+    width: 30%;
+}
+
+
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 50%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: none;
+    color: white;
+    padding: 12px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 280px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+#print-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#print-btn:hover {
+    background-color: blue;
+}
+@media print {
+    header {
+        display: none;
+    }
+    #sidebar {
+        display: none;
+    }
+    #print-btn {
+        display: none;
+    }
+    .main-content {
+        margin-left: 0%;
+        width: 100%;
+    }
+    table {
+    border-collapse: collapse;
+    width: 90%;
+    font-size: 20px;
+}
+
+th, td {
+    border: 1px solid #0f0f0f;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    width: 100%;
+    position: fixed;
+    color: #fff;
+    z-index: 1;
+    margin-top: -4%;
+}
+
+header h2 {
+    font-size: 150%;
+}
+
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 50%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: none;
+    color: white;
+    padding: 12px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 28px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 280px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: 4%;
+}
+
+.main-content h2 {
+    font-size: 28px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 24px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+#print-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 26px;
+}
+
+#print-btn:hover {
+    background-color: blue;
+}
+#report-data {
+    font-size: 24px;
+}
+}
+
+@media (max-width: 600px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    width: 100%;
+    position: fixed;
+    color: #fff;
+    z-index: 1;
+}
+
+header h2 {
+    font-size: 110%;
+}
+
+#link {
+    float: right;
+    margin-top: -46px;
+    border-radius: 8px;
+    margin-right: 2%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: block;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 40vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    margin-top: 6%;
+    left: 0;
+    display: none;
+    transition: width 0.3s;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 22px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 0px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+.main-content h2 {
+    font-size: 22px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 18px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+#print-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#print-btn:hover {
+    background-color: blue;
+}
+
+#report-data {
+    font-size: 20px;
+}
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <center><h2>IVAN COMPUTER SERVICES AINA</h2></center>
+    </header>
+    <div id="sidebar">
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="sales.html"><i class="fas fa-shopping-cart"></i> Sales</a></li>
+            <li><a href="manage sales.html"><i class="fas fa-cog"></i> Manage Sales</a></li>
+            <li><a href="finance.html"><i class="fas fa-money-bill"></i> Finance</a></li>
+            <li><a href="manage finance.html"><i class="fas fa-cog"></i> Manage Finance</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt"></i> Report</a></li>
+            <li><a href="ledger.html"><i class="fas fa-book"></i> Ledger</a></li>
+            <li id="btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</li></ul>
+    </div>
+    <div class="main-content">
+        <h2>Report</h2>
+        <button id="link">View links</button>
+        <button id="print-btn"><i class="fa-solid fa-print"></i> Print</button>
+        <div id="report-data"></div>
+    </div>
+
+    <script>
+        // Retrieve finance and sales data from local storage
+var financeData = JSON.parse(localStorage.getItem('finance'));
+var salesData = JSON.parse(localStorage.getItem('sales'));
+
+// Organize finance and sales data by month and year
+var financeByMonth = {};
+var salesByMonth = {};
+if (financeData !== null) {
+  financeData.forEach(function(finance) {
+    var date = new Date(finance.dateIssue);
+    var month = date.toLocaleString('default', { month: 'long' });
+    var year = date.getFullYear();
+    if (!financeByMonth[year]) {
+      financeByMonth[year] = {};
+    }
+    if (!financeByMonth[year][month]) {
+      financeByMonth[year][month] = 0;
+    }
+    financeByMonth[year][month] += parseFloat(finance.amountSigned);
+  });
+}
+if (salesData !== null) {
+  salesData.forEach(function(sale) {
+    var date = new Date(sale.date);
+    var month = date.toLocaleString('default', { month: 'long' });
+    var year = date.getFullYear();
+    if (!salesByMonth[year]) {
+      salesByMonth[year] = {};
+    }
+    if (!salesByMonth[year][month]) {
+      salesByMonth[year][month] = 0;
+    }
+    salesByMonth[year][month] += parseFloat(sale.amount);
+  });
+}
+
+// Display report data
+var reportHtml = '';
+Object.keys(financeByMonth).forEach(function(year) {
+  reportHtml += `<h3>${year}</h3>`;
+  reportHtml += `<table>`;
+  reportHtml += `<tr><th>Month</th><th>Total Finance</th><th>Total Sales</th><th>Profit</th></tr>`;
+  Object.keys(financeByMonth[year]).sort((a, b) => {
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months.indexOf(a) - months.indexOf(b);
+  }).forEach(function(month) {
+    var totalFinance = financeByMonth[year][month];
+    var totalSales = salesByMonth[year] && salesByMonth[year][month] ? salesByMonth[year][month] : 0;
+    var profit = totalSales - totalFinance;
+    reportHtml += `<tr><td>${month}</td><td>${totalFinance}</td><td>${totalSales}</td><td>${profit}</td></tr>`;
+  });
+  reportHtml += `</table>`;
+});
+document.getElementById('report-data').innerHTML = reportHtml;
+
+// Print functionality
+document.getElementById('print-btn').addEventListener('click', function() {
+  window.print();
+});
+
+
+const linkDisplay = document.getElementById('sidebar');
+document.getElementById('link').addEventListener('click',function() {
+  linkDisplay.style.display='block';
+  reset();
+});
+const logoutBtn = document.getElementById('logout-btn');
+const logoutModal = document.getElementById('logout-modal');
+const yesBtn = document.getElementById('yes-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+logoutBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'block';
+});
+
+yesBtn.addEventListener('click', () => {
+    // Log out the user (for demo, just redirect to login page)
+    window.location.href = 'file:///C:/Users/IT%20TECH%202025/Desktop/WEBSITES/IT%20DATA%20MONITOR%20SYSTEM/index.html';
+});
+
+cancelBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'none';
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVAN COMPUTER SERVICES AINA - Ledger</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    color: #fff;
+    margin-top: -30px;
+    position: fixed;
+    width: 100%;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    z-index: 999;
+}
+
+.modal button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+#yes-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    width: 30%;
+}
+
+#cancel-btn {
+    background-color: #f44336;
+    color: #fff;
+    width: 30%;
+}
+
+.board {
+    border: 1px solid black;
+    margin-bottom: 10%;
+    border-bottom: 10px solid black;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.searched {
+    border: 1px solid black;
+    margin-bottom: 10%;
+    border-bottom: 10px solid black;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 50%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: none;
+    color: white;
+    padding: 12px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30%;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 285px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: -30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 95%;
+    margin-left: 3%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+#print-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#print-btn:hover {
+    background-color: rgb(95, 160, 224);
+}
+
+#search-input {
+    padding: 10px;
+    width: 50%;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#search-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search-btn:hover {
+    background-color: rgb(95, 160, 224);
+}
+
+@media print {
+    #ledger-data {
+        display: block;
+        margin-left: -40%;
+        margin-top: -50em;
+    }
+    header {
+        display: none;
+    }
+    .sidebar {
+        display: none;
+    }
+    #search-input {
+        display: none;
+    }
+    button {
+        display: none;
+    }
+    .board .logo {
+        width: 90%;
+        height: 80%;
+        margin-top: 15%;
+    }
+}
+
+/* Media Queries */
+
+@media (max-width: 1024px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    color: #fff;
+    margin-top: -50px;
+    position: fixed;
+    width: 100%;
+    font-size: 120%;
+}
+
+#message {
+    background-color: white;
+    color: black;
+    margin: -10% 0 0 30%;
+    padding: 10px 20px;
+    z-index: 999;
+    position: absolute;
+    border-radius: 6px;
+    font-size: 20px;
+    box-shadow: #ccccff;
+    border: 1px solid dodgerblue;
+    display: none;
+}
+
+#confirm a{
+    text-decoration: none;
+    font-size: 18px;
+    color: green;
+    font-weight: 600;
+}
+#confirm .no a{
+    color: red;
+    margin-left: 60%;
+}
+
+#link {
+    float: right;
+    margin-top: -70px;
+    border-radius: 8px;
+    margin-right: 50%;
+    margin-bottom: 2%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: block;
+    color: white;
+    padding: 12px;
+    font-size: 24px;
+}
+
+.board {
+    border: 1px solid black;
+    margin-bottom: 10%;
+    border-bottom: 10px solid black;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 28px;
+    width: 100%;
+}
+
+.board h4 {
+    font-size: 40px;
+}
+
+.searched {
+    border: 1px solid black;
+    margin-bottom: 10%;
+    border-bottom: 10px solid black;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 26px;
+}
+
+#sidebar {
+    width: 200px;
+    height: 30vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 60px;
+    left: 70px;
+    z-index: 999;
+    opacity: 999;
+    display: none;
+    margin-left: 50%;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0px;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 26px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 10px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: 50px;
+}
+
+.main-content h2 {
+    font-size: 36px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 95%;
+    margin-left: 3%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+#print-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 26px;
+    width: 10%;
+}
+
+#print-btn:hover {
+    background-color: rgb(95, 160, 224);
+}
+
+#search-input {
+    padding: 14px;
+    width: 60%;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 26px;
+}
+
+#search-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 26px;
+    width: 14%;
+}
+
+#search-btn:hover {
+    background-color: rgb(95, 160, 224);
+}
+
+@media print {
+    #ledger-data {
+        display: block;
+        margin-left: -40%;
+        margin-top: -50em;
+        z-index: 999;
+    }
+    header {
+        display: none;
+    }
+    #sidebar {
+        display: none;
+    }
+    #search-input {
+        display: none;
+    }
+    button {
+        display: none;
+    }
+    .board .logo {
+        width: 90%;
+        height: 80%;
+        margin-top: 15%;
+    }
+    #link {
+        display: none;
+    }
+}
+
+}
+
+@media (max-width: 600px) {
+    body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #414242;
+    color: #fff;
+    margin-top: -50px;
+    position: fixed;
+    width: 100%;
+}
+
+header h2 {
+    margin-left: -50%;
+    font-size: 100%;
+}
+
+#message {
+    background-color: white;
+    color: black;
+    margin: 60% 0 0 5%;
+    padding: 10px 20px;
+    z-index: 999;
+    position: absolute;
+    border-radius: 6px;
+    font-size: 20px;
+    box-shadow: #ccccff;
+    border: 1px solid dodgerblue;
+    display: none;
+}
+
+#confirm a{
+    text-decoration: none;
+    font-size: 18px;
+    color: green;
+    font-weight: 600;
+}
+#confirm .no a{
+    color: red;
+    margin-left: 60%;
+}
+
+#link {
+    float: right;
+    margin-top: -50px;
+    border-radius: 8px;
+    margin-right: 0;
+    margin-bottom: 4%;
+    cursor: pointer;
+    background-color: rgb(248, 98, 98);
+    border: none;
+    display: block;
+    color: white;
+    padding: 6px;
+    font-size: 20px;
+}
+
+.board {
+    border: 1px solid black;
+    margin-bottom: 10%;
+    border-bottom: 10px solid black;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 20px;
+    width: 240%;
+}
+
+.searched {
+    border: 1px solid black;
+    margin-bottom: 10%;
+    border-bottom: 10px solid black;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 20px;
+}
+
+#sidebar {
+    width: 250px;
+    height: 40vh;
+    background-color: #414242;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    margin-top: -1%;
+    margin-left: -8%;
+    transition: width 0.3s;
+    display: none;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0px;
+}
+
+#sidebar li {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+#sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar a:hover {
+    color: #ccc;
+}
+
+#sidebar .active {
+    color: #333;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.main-content {
+    margin-left: 0px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    margin-top: 50px;
+}
+
+.main-content h2 {
+    font-size: 24px;
+    margin-top: -3%;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: 3%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+#print-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 16%;
+    font-size: 20px;
+}
+
+#print-btn:hover {
+    background-color: rgb(95, 160, 224);
+}
+
+#search-input {
+    padding: 4px;
+    width: 56%;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 6px;
+}
+
+#search-btn {
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 22%;
+    font-size: 20px;
+}
+
+#search-btn:hover {
+    background-color: rgb(95, 160, 224);
+}
+
+@media print {
+    #ledger-data {
+        display: block;
+        margin-left: -40%;
+        margin-top: -50em;
+    }
+    header {
+        display: none;
+    }
+    .sidebar {
+        display: none;
+    }
+    #search-input {
+        display: none;
+    }
+    button {
+        display: none;
+    }
+    .board .logo {
+        width: 90%;
+        height: 80%;
+        margin-top: 15%;
+    }
+}
+
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <center><h2>IVAN COMPUTER SERVICES AINA</h2></center>
+    </header>
+    <div id="sidebar">
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="sales.html"><i class="fas fa-shopping-cart"></i> Sales</a></li>
+            <li><a href="manage sales.html"><i class="fas fa-cog"></i> Manage Sales</a></li>
+            <li><a href="finance.html"><i class="fas fa-money-bill"></i> Finance</a></li>
+            <li><a href="manage finance.html"><i class="fas fa-cog"></i> Manage Finance</a></li>
+            <li><a href="report.html"><i class="fas fa-file-alt"></i> Report</a></li>
+            <li><a href="ledger.html"><i class="fas fa-book"></i> Ledger</a></li>
+            <li id="btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</li></ul>
+    </div>
+    <div id="message">
+        <p>Are you sure you want to log out ?</p>
+        <p id="confirm"><a href="login.html">Yes</a><span class="no"><a href="dashboard.html">Cancel</a></span></p>
+    </div>
+    <div class="main-content">
+        <h2>Ledger</h2>
+        <button id="link">View links</button>
+        <input type="month" id="search-input">
+        <button id="search-btn"><i class="fa-solid fa-search"></i> Search</button>
+        <button id="print-btn"><i class="fa-solid fa-print"></i> Print</button>
+        <div id="ledger-data" style="margin-top: 3%;"></div>
+    </div>
+
+    <script>
+        // Retrieve finance and sales data from local storage
+var financeData = JSON.parse(localStorage.getItem('finance'));
+var salesData = JSON.parse(localStorage.getItem('sales'));
+
+// Generate ledger for each month
+var ledgerHtml = '';
+var currentYear = new Date().getFullYear();
+for (var month = 0; month < 12; month++) {
+    var monthName = new Date(currentYear, month, 1).toLocaleString('default', { month: 'long' });
+    var financeForMonth = financeData ? financeData.filter(finance => new Date(finance.dateIssue).getMonth() === month && new Date(finance.dateIssue).getFullYear() === currentYear) : [];
+    var salesForMonth = salesData ? salesData.filter(sale => new Date(sale.date).getMonth() === month && new Date(sale.date).getFullYear() === currentYear) : [];
+   
+    ledgerHtml += `<div class="board">`;
+    ledgerHtml += `<img src="images/logo.png" class="logo" style="float: left; width: 16%; margin-right: 6%; margin-top: 2%;  margin-left: 3%;">`;
+    ledgerHtml += `<h3 style="font-size: 30px; margin-bottom: -2%;">IVAN COMPUTER SERVICES AINA</h3>`;
+    ledgerHtml += `<h4 style="font-size: 20px; margin-bottom: -1%;">Ledger for ${monthName} ${currentYear}</h4>`;
+    ledgerHtml += `<p style="font-size: 20px; margin-bottom: -1%;">Business Address: Opposite STAR N/P SCH, Yumbe, Uganda</p>`;
+    ledgerHtml += `<p style="font-size: 20px;">Contact: +256 778007451, info@ivancomputerservices.com</p>`;
+    ledgerHtml += `<table>`;
+    ledgerHtml += `<tr><th>Date</th><th>Transaction Type</th><th>Amount</th></tr>`;
+    financeForMonth.forEach(finance => {
+        ledgerHtml += `<tr><td>${finance.dateIssue}</td><td>Finance</td><td>${finance.amountSigned}</td></tr>`;
+    });
+    salesForMonth.forEach(sale => {
+        ledgerHtml += `<tr><td>${sale.date}</td><td>Sales</td><td>${sale.amount}</td></tr>`;
+    });
+    ledgerHtml += `</table>`;
+    ledgerHtml += `<p style="margin-left: 3%;">Total Finance for ${monthName}: ${financeForMonth.reduce((acc, finance) => acc + parseFloat(finance.amountSigned), 0)}</p>`;
+    ledgerHtml += `<p style="margin-left: 3%;">Total Sales for ${monthName}: ${salesForMonth.reduce((acc, sale) => acc + parseFloat(sale.amount), 0)}</p>`;
+    ledgerHtml += `<hr>`;
+    ledgerHtml += `</div>`;
+}
+document.getElementById('ledger-data').innerHTML = ledgerHtml;
+
+// Print functionality
+document.getElementById('print-btn').addEventListener('click', function() {
+    window.print();
+});
+
+// Search functionality
+document.getElementById('search-btn').addEventListener('click', function() {
+    var searchInput = document.getElementById('search-input').value;
+    var searchYear = searchInput.split('-')[0];
+    var searchMonth = searchInput.split('-')[1];
+
+    var financeForMonth = financeData ? financeData.filter(finance => new Date(finance.dateIssue).getMonth() === parseInt(searchMonth) - 1 && new Date(finance.dateIssue).getFullYear() === parseInt(searchYear)) : [];
+    var salesForMonth = salesData ? salesData.filter(sale => new Date(sale.date).getMonth() === parseInt(searchMonth) - 1 && new Date(sale.date).getFullYear() === parseInt(searchYear)) : [];
+
+    var ledgerHtml = '';
+    ledgerHtml += `<div class="searched">`;
+    ledgerHtml += `<img src="images/logo.png" style="float: left; width: 16%; margin-right: 6%; margin-top: 2%;  margin-left: 3%;">`;
+    ledgerHtml += `<h3 style="font-size: 30px; margin-bottom: -2%;">IVAN COMPUTER SERVICES AINA</h3>`;
+    ledgerHtml += `<h4 style="font-size: 20px; margin-bottom: -1%;">Ledger for ${new Date(searchYear, searchMonth - 1, 1).toLocaleString('default', { month: 'long' })} ${searchYear}</h4>`;
+    ledgerHtml += `<p style="font-size: 20px; margin-bottom: -1%;">Business Address: Opposite Star Nur & Pri sch. Yumbe, Uganda</p>`;
+    ledgerHtml += `<p style="font-size: 20px;">Contact: +256 778007451, info@ivancomputerservices.com</p>`;
+    ledgerHtml += `<table style="margin-bottom: 10%;">`;
+    ledgerHtml += `<tr><th>Date</th><th>Transaction Type</th><th>Amount</th></tr>`;
+    financeForMonth.forEach(finance => {
+        ledgerHtml += `<tr><td>${finance.dateIssue}</td><td>Finance</td><td>${finance.amountSigned}</td></tr>`;
+    });
+    salesForMonth.forEach(sale => {
+        ledgerHtml += `<tr><td>${sale.date}</td><td>Sales</td><td>${sale.amount}</td></tr>`;
+    });
+    ledgerHtml += `</table>`;
+    ledgerHtml += `<p style="margin-left: 3%;">Total Finance for ${monthName}: ${financeForMonth.reduce((acc, finance) => acc + parseFloat(finance.amountSigned), 0)}</p>`;
+    ledgerHtml += `<p style="margin-left: 3%;">Total Sales for ${monthName}: ${salesForMonth.reduce((acc, sale) => acc + parseFloat(sale.amount), 0)}</p>`;
+    ledgerHtml += `<hr>`;
+    
+    ledgerHtml += `</div>`;
+    document.getElementById('ledger-data').innerHTML = ledgerHtml;
+});
+
+const linkDisplay = document.getElementById('sidebar');
+document.getElementById('link').addEventListener('click',function() {
+  linkDisplay.style.display='block';
+  reset();
+});
+const logoutBtn = document.getElementById('logout-btn');
+const logoutModal = document.getElementById('logout-modal');
+const yesBtn = document.getElementById('yes-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+logoutBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'block';
+});
+
+yesBtn.addEventListener('click', () => {
+    // Log out the user (for demo, just redirect to login page)
+    window.location.href = 'file:///C:/Users/IT%20TECH%202025/Desktop/WEBSITES/IT%20DATA%20MONITOR%20SYSTEM/index.html';
+});
+
+cancelBtn.addEventListener('click', () => {
+    logoutModal.style.display = 'none';
+});
+
+    </script>
+</body>
+</html>
